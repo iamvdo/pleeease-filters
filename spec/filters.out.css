@@ -1,0 +1,164 @@
+/* -------------------------
+
+Filters
+
+*/
+
+/* filter: none */
+.none {
+	filter: none;
+}
+.none {
+	filter: blur(2px) none;
+}
+
+/* filter: grayscale */
+.grayscale {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.37007999999999996 0.57216 0.057760000000000006 0 0 0.17008 0.77216 0.057760000000000006 0 0 0.17008 0.57216 0.25775999999999993 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: grayscale(.8);
+}
+.grayscale {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.37007999999999996 0.57216 0.057760000000000006 0 0 0.17008 0.77216 0.057760000000000006 0 0 0.17008 0.57216 0.25775999999999993 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: grayscale(80%);
+}
+
+/* filter: sepia */
+.sepia {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.5144 0.6152000000000001 0.1512 0 0 0.2792 0.7488 0.13440000000000002 0 0 0.21760000000000002 0.4272 0.30479999999999996 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: sepia(.8);
+}
+.sepia {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.5144 0.6152000000000001 0.1512 0 0 0.2792 0.7488 0.13440000000000002 0 0 0.21760000000000002 0.4272 0.30479999999999996 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: sepia(80%);
+}
+
+/* filter: saturate */
+.saturate {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="1.7870000000000001 -0.715 -0.072 0 0 -0.213 1.305 -0.072 0 0 -0.213 -0.715 1.9280000000000002 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: saturate(2);
+}
+.saturate {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="1.7870000000000001 -0.715 -0.072 0 0 -0.213 1.305 -0.072 0 0 -0.213 -0.715 1.9280000000000002 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: saturate(200%);
+}
+
+/* filter: hue-rotate */
+.hueRotate {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="hueRotate" color-interpolation-filters="sRGB" values="180" /></filter></svg>#filter');
+	filter: hue-rotate(180deg);
+}
+.hueRotate {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="hueRotate" color-interpolation-filters="sRGB" values="90" /></filter></svg>#filter');
+	filter: hue-rotate(.25turn);
+}
+
+/* filter: invert */
+.invert {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="1 0" /><feFuncG type="table" tableValues="1 0" /><feFuncB type="table" tableValues="1 0" /></feComponentTransfer></filter></svg>#filter');
+	filter: invert(1);
+}
+.invert {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.4 0.6" /><feFuncG type="table" tableValues="0.4 0.6" /><feFuncB type="table" tableValues="0.4 0.6" /></feComponentTransfer></filter></svg>#filter');
+	filter: invert(40%);
+}
+
+/* filter: opacity */
+.opacity {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncA type="table" tableValues="0 0.5" /></feComponentTransfer></filter></svg>#filter');
+	filter: opacity(.5);
+}
+.opacity {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncA type="table" tableValues="0 0.8" /></feComponentTransfer></filter></svg>#filter');
+	filter: opacity(80%);
+}
+
+/* filter: brightness */
+.brightness {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.5" /><feFuncG type="linear" slope="0.5" /><feFuncB type="linear" slope="0.5" /></feComponentTransfer></filter></svg>#filter');
+	filter: brightness(.5);
+}
+.brightness {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="2" /><feFuncG type="linear" slope="2" /><feFuncB type="linear" slope="2" /></feComponentTransfer></filter></svg>#filter');
+	filter: brightness(200%);
+}
+
+/* filter: contrast */
+.contrast {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.5" intercept="0.25" /><feFuncG type="linear" slope="0.5" intercept="0.25" /><feFuncB type="linear" slope="0.5" intercept="0.25" /></feComponentTransfer></filter></svg>#filter');
+	filter: contrast(.5);
+}
+.contrast {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="2" intercept="-0.5" /><feFuncG type="linear" slope="2" intercept="-0.5" /><feFuncB type="linear" slope="2" intercept="-0.5" /></feComponentTransfer></filter></svg>#filter');
+	filter: contrast(200%);
+}
+
+/* filter: blur */
+.blur {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
+	filter: blur(4px);
+}
+.blur {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="8" /></filter></svg>#filter');
+	filter: blur(.5rem);
+}
+
+/* filter: drop-shadow */
+.dropShadow {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur in="SourceAlpha" stdDeviation="4" /><feOffset dx="5" dy="5" result="offsetblur" /><feFlood flood-color="rgba(255,69,0,1)" /><feComposite in2="offsetblur" operator="in" /><feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge></filter></svg>#filter');
+	filter: drop-shadow(4px 4px 4px orangered);
+}
+
+/* filter mix */
+.mix {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="hueRotate" color-interpolation-filters="sRGB" values="90" /><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="5" intercept="-2" /><feFuncG type="linear" slope="5" intercept="-2" /><feFuncB type="linear" slope="5" intercept="-2" /></feComponentTransfer></filter></svg>#filter');
+	filter: hue-rotate(90deg) contrast(5);
+}
+.mix {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="5" intercept="-2" /><feFuncG type="linear" slope="5" intercept="-2" /><feFuncB type="linear" slope="5" intercept="-2" /></feComponentTransfer><feColorMatrix type="hueRotate" color-interpolation-filters="sRGB" values="90" /></filter></svg>#filter');
+	filter: contrast(5) hue-rotate(90deg);
+}
+
+/* -------------------------
+
+Invalid Values
+
+*/
+.invalid {
+	filter: grayscale(-1);
+}
+.invalid {
+	filter: hue-rotate(100px);
+}
+.invalid {
+	filter: blur(2);
+}
+.invalid {
+	filter: invert(40 %);
+}
+
+/* -------------------------
+
+Edge cases
+
+*/
+.case {
+	filter: alpha(opacity=100);
+}
+.case {
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+.case {
+	filter: url(filters.svg#blur);
+}
+@media screen {
+	.case {
+		filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="2" /></filter></svg>#filter');
+		filter: blur(2px);
+	}
+}
+@supports (filter: blur(2px)) {
+	.case {
+		filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="2" /></filter></svg>#filter');
+		filter: blur(2px);
+	}
+}
