@@ -1,0 +1,6 @@
+.none {
+	filter: none;
+}
+.none {
+	filter: blur(2px) none;
+}

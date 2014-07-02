@@ -1,0 +1,8 @@
+.opacity {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncA type="table" tableValues="0 0.5" /></feComponentTransfer></filter></svg>#filter');
+	filter: opacity(.5);
+}
+.opacity {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncA type="table" tableValues="0 0.8" /></feComponentTransfer></filter></svg>#filter');
+	filter: opacity(80%);
+}

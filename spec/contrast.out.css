@@ -1,0 +1,8 @@
+.contrast {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.5" intercept="0.25" /><feFuncG type="linear" slope="0.5" intercept="0.25" /><feFuncB type="linear" slope="0.5" intercept="0.25" /></feComponentTransfer></filter></svg>#filter');
+	filter: contrast(.5);
+}
+.contrast {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="2" intercept="-0.5" /><feFuncG type="linear" slope="2" intercept="-0.5" /><feFuncB type="linear" slope="2" intercept="-0.5" /></feComponentTransfer></filter></svg>#filter');
+	filter: contrast(200%);
+}

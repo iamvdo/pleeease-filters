@@ -1,0 +1,6 @@
+.multiple {
+	filter: hue-rotate(90deg) contrast(5);
+}
+.multiple {
+	filter: contrast(5) hue-rotate(90deg);
+}

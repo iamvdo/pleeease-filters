@@ -1,0 +1,6 @@
+.hueRotate {
+	filter: hue-rotate(180deg);
+}
+.hueRotate {
+	filter: hue-rotate(.25turn);
+}

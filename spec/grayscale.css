@@ -1,0 +1,6 @@
+.grayscale {
+	filter: grayscale(.8);
+}
+.grayscale {
+	filter: grayscale(80%);
+}

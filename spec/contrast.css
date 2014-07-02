@@ -1,0 +1,6 @@
+.contrast {
+	filter: contrast(.5);
+}
+.contrast {
+	filter: contrast(200%);
+}

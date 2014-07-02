@@ -1,0 +1,12 @@
+.invalid {
+	filter: grayscale(-1);
+}
+.invalid {
+	filter: hue-rotate(100px);
+}
+.invalid {
+	filter: blur(2);
+}
+.invalid {
+	filter: invert(40 %);
+}
