@@ -346,6 +346,10 @@ function Filter (opts) {
 
 			var properties = {};
 
+			if (unit === '' && amount !== 0) {
+				return properties;
+			}
+
 			amount = helpers.length(amount, unit);
 
 			// CSS
@@ -522,7 +526,7 @@ Filter.prototype.convert = function (value) {
 		properties = this.filters.contrast(amount, unit);
 	}
 	// Blur
-	fmatch = value.match(/(blur)\((\s*[0-9\.]+)(px|em|rem)\s*\)/i);
+	fmatch = value.match(/(blur)\((\s*[0-9\.]+)(px|em|rem|)\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];

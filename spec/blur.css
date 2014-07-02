@@ -4,3 +4,9 @@
 .blur {
 	filter: blur(.5rem);
 }
+.blur {
+	filter: blur(0);
+}
+.blur {
+	filter: blur(2);
+}
