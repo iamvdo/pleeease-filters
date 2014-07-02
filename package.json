@@ -17,11 +17,11 @@
     "test": "jasmine-node spec"
   },
   "dependencies": {
+    "postcss": "^1.0.0",
     "onecolor": "~2.4.0",
     "deep-extend": "~0.2.10"
   },
   "devDependencies": {
-    "postcss": "~1.0.0",
     "jasmine-node": "~1.14.3"
   }
 }
