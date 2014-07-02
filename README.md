@@ -19,7 +19,7 @@ You get `bar.css`:
 
 ```css
 .blur {
-	filter: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg">&lt;filter id="filter">&lt;feGaussianBlur stdDeviation="4" />&lt;/filter>&lt;/svg>#filter');
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
 	filter: blur(4px);
 }
 ```
@@ -61,7 +61,7 @@ Using the first example, you'll get:
 
 ```css
 .ie {
-	filter: url('data:image/svg+xml;utf8,&lt;svg xmlns="http://www.w3.org/2000/svg">&lt;filter id="filter">&lt;feGaussianBlur stdDeviation="4" />&lt;/filter>&lt;/svg>#filter');
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
 	filter: blur(4px);
 	filter: progid:DXImageTransform.Microsoft.Blur(pixelradius=4);
 }
@@ -73,7 +73,8 @@ Using the first example, you'll get:
 
 ##Licence
 
-MIT © 2014 [Vincent De Oliveira - iamvdo](https://github.com/iamvdo)
+MIT © 2014 [Vincent De Oliveira &middot; iamvdo](https://github.com/iamvdo)
 
-pleeease-filters is an adaptation of [CSS-Filters-Polyfill](https://github.com/Schepp/CSS-Filters-Polyfill)
+This module is an adaptation of [CSS-Filters-Polyfill](https://github.com/Schepp/CSS-Filters-Polyfill)
+
 Copyright (c) 2012 - 2013 Christian Schepp Schaefer
