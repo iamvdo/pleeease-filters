@@ -1,7 +1,7 @@
 Pleeease: filters
 =================
 
-Convert CSS shorthand filters to SVG equivalents.
+Convert CSS shorthand filters to SVG equivalent.
 
 Used by [Pleeease](https://github.com/iamvdo/pleeease), a CSS post-processor.
 
