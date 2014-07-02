@@ -584,8 +584,19 @@ Filter.prototype.postcss = function (css) {
 				if (_this.options.oldIE && properties.filtersIE.length > 0) {
 					var filtersIE = properties.filtersIE.join(' ');
 
-					// insert IE filters
-					rule.insertAfter(decl, { prop: 'filter', value: filtersIE });
+					// insert IE filters, only if it's not already present
+					var newDecl = { prop: 'filter', value: filtersIE};
+					var add = true;
+					rule.eachDecl(function (d) {
+						if (newDecl.value === d.value) {
+							add = false;
+							return false;
+						}
+						
+					});
+					if (add) {
+						rule.insertAfter(decl, newDecl);
+					}
 				}
 
 				if (properties.filtersSVG.length > 0) {
@@ -600,8 +611,18 @@ Filter.prototype.postcss = function (css) {
 						var svgString = createSVG(properties.filtersSVG);
 						var filtersSVG = 'url(\'data:image/svg+xml;utf8,' + svgString + '#filter\')';
 
-						// insert SVG filters
-						rule.insertBefore(decl, { prop: 'filter', value: filtersSVG});
+						// insert SVG filters, only if it's not already present
+						var newDecl = { prop: 'filter', value: filtersSVG};
+						var add = true;
+						rule.eachDecl(function (d) {
+							if (newDecl.value === d.value) {
+								add = false;
+								return false;
+							}
+						});
+						if (add) {
+							rule.insertBefore(decl, newDecl);
+						}
 					}
 				}
 

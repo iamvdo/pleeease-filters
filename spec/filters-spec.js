@@ -12,7 +12,13 @@ var test = function (name, options) {
 
   // css
   var css = fs.readFileSync(__dirname + name + '.css', 'utf-8');
-  var expected = fs.readFileSync(__dirname + name + '.out.css', 'utf-8');
+  var expected;
+
+  if (typeof options !== 'undefined' && options.same) {
+    expected = css;
+  } else {
+    expected = fs.readFileSync(__dirname + name + '.out.css', 'utf-8');
+  }
 
   // process
   var processed = filter.process(css, options);
@@ -109,6 +115,12 @@ describe('pleeease-filters', function () {
   it('should add IE filter when asking', function() {
 
     test('ie', {oldIE: true});
+
+  });
+
+  it('should not add filters if they are already presents', function() {
+
+    test('presents', {same: true, oldIE: true});
 
   });
 
