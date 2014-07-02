@@ -1,9 +1,9 @@
 Pleeease: filters
 =================
 
-Convert CSS shorthand filters to SVG ones.
+Convert CSS shorthand filters to SVG equivalents.
 
-Use by [Pleeease](https://github.com/iamvdo/pleeease), a CSS post-processor.
+Used by [Pleeease](https://github.com/iamvdo/pleeease), a CSS post-processor.
 
 ##Example
 
@@ -60,7 +60,7 @@ var options = {
 Using the first example, you'll get:
 
 ```css
-.ie {
+.blur {
 	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
 	filter: blur(4px);
 	filter: progid:DXImageTransform.Microsoft.Blur(pixelradius=4);
@@ -75,6 +75,4 @@ Using the first example, you'll get:
 
 MIT © 2014 [Vincent De Oliveira &middot; iamvdo](https://github.com/iamvdo)
 
-This module is an adaptation of [CSS-Filters-Polyfill](https://github.com/Schepp/CSS-Filters-Polyfill)
-
-Copyright (c) 2012 - 2013 Christian Schepp Schaefer
+This module is an adaptation of [CSS-Filters-Polyfill](https://github.com/Schepp/CSS-Filters-Polyfill). Copyright (c) 2012 - 2013 Christian Schepp Schaefer
