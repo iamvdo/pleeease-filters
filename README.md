@@ -24,6 +24,23 @@ You get `bar.css`:
 }
 ```
 
+##Filters
+
+It converts all 10 CSS shorthand filters:
+
+* grayscale
+* sepia
+* saturate
+* hue-rotate
+* invert
+* opacity
+* brightness
+* contrast
+* blur
+* drop-shadow
+
+Learn [more about CSS filters](https://developer.mozilla.org/en-US/docs/Web/CSS/filter)
+
 ##Usage
 
 	$ npm install pleeease-filters
