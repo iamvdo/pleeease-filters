@@ -608,7 +608,7 @@ Filter.prototype.postcss = function (css) {
 					}
 					if (!none) {
 						var svgString = createSVG(properties.filtersSVG);
-						var filtersSVG = 'url(\'data:image/svg+xml;utf8,' + svgString + '#filter\')';
+						var filtersSVG = 'url(\'data:image/svg+xml;charset=utf-8,' + svgString + '#filter\')';
 
 						// insert SVG filters, only if it's not already present
 						var newDecl = { prop: 'filter', value: filtersSVG};

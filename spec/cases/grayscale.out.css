@@ -1,8 +1,8 @@
 .grayscale {
-	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.37007999999999996 0.57216 0.057760000000000006 0 0 0.17008 0.77216 0.057760000000000006 0 0 0.17008 0.57216 0.25775999999999993 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.37007999999999996 0.57216 0.057760000000000006 0 0 0.17008 0.77216 0.057760000000000006 0 0 0.17008 0.57216 0.25775999999999993 0 0 0 0 0 1 0" /></filter></svg>#filter');
 	filter: grayscale(.8);
 }
 .grayscale {
-	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.37007999999999996 0.57216 0.057760000000000006 0 0 0.17008 0.77216 0.057760000000000006 0 0 0.17008 0.57216 0.25775999999999993 0 0 0 0 0 1 0" /></filter></svg>#filter');
+	filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.37007999999999996 0.57216 0.057760000000000006 0 0 0.17008 0.77216 0.057760000000000006 0 0 0.17008 0.57216 0.25775999999999993 0 0 0 0 0 1 0" /></filter></svg>#filter');
 	filter: grayscale(80%);
 }

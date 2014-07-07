@@ -1,5 +1,5 @@
 .ie {
-	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="2" /></filter></svg>#filter');
+	filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="2" /></filter></svg>#filter');
 	filter: blur(2px);
 	filter: progid:DXImageTransform.Microsoft.Blur(pixelradius=2);
 }
