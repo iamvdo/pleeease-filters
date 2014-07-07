@@ -451,10 +451,6 @@ function Filter (opts) {
 
 	};
 
-	
-
-	
-
 }
 
 Filter.prototype.convert = function (value) {
@@ -563,9 +559,9 @@ Filter.prototype.postcss = function (css) {
 				// get values
 				var values = decl.value.split(/\)\s+/);
 				var properties = {
-					filtersCSS:		[],
-					filtersSVG:		[],
-					filtersIE:		[]
+					filtersCSS: [],
+					filtersSVG: [],
+					filtersIE:  []
 				};
 
 				for (var key in values) {
@@ -596,7 +592,6 @@ Filter.prototype.postcss = function (css) {
 							add = false;
 							return false;
 						}
-						
 					});
 					if (add) {
 						rule.insertAfter(decl, newDecl);
@@ -639,9 +634,7 @@ Filter.prototype.postcss = function (css) {
 };
 
 Filter.prototype.process = function (css) {
-
 	return postcss().use(this.postcss).process(css).css;
-
 };
 
 var filter = function (options) {

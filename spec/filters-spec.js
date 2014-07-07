@@ -6,10 +6,9 @@
 var fs     = require('fs');
 var filter = require('../index');
 
-var __dirname = 'spec/';
+var __dirname = 'spec/cases/';
 
 var test = function (name, options) {
-
   // css
   var css = fs.readFileSync(__dirname + name + '.css', 'utf-8');
   var expected;
@@ -118,9 +117,9 @@ describe('pleeease-filters', function () {
 
   });
 
-  it('should not add filters if they are already presents', function() {
+  it('should not add filters if they are already present', function() {
 
-    test('presents', {same: true, oldIE: true});
+    test('present', {same: true, oldIE: true});
 
   });
 
