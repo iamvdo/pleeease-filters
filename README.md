@@ -5,6 +5,8 @@ Convert CSS shorthand filters to SVG equivalent.
 
 Used by [Pleeease](https://github.com/iamvdo/pleeease), a CSS post-processor.
 
+Try it by yourself in the [Pleeease playground](http://pleeease.io/playground.html?div%20%7B%0A%20%20filter:%20blur(4px)%0A%7D)
+
 ##Example
 
 You write `foo.css`:
