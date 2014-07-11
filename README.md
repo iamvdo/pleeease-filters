@@ -43,6 +43,18 @@ It converts all 10 CSS shorthand filters:
 
 Learn [more about CSS filters](https://developer.mozilla.org/en-US/docs/Web/CSS/filter)
 
+##Prefixes
+
+This tool doesn't add prefixes. If you want them, you should use [Autoprefixer](https://github.com/ai/autoprefixer). This is what [Pleeease](https://github.com/iamvdo/pleeease) does:
+
+```css
+.blur {
+	filter: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
+	-webkit-filter: blur(4px);
+	        filter: blur(4px);
+}
+```
+
 ##Usage
 
 	$ npm install pleeease-filters
