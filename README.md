@@ -100,7 +100,17 @@ Using the first example, you'll get:
 
 ##Note
 
-**Be careful**, not all browsers support CSS or SVG filters. For your information, latest WebKit browsers support CSS shorthand, Firefox support SVG filters and IE9- support IE filters (limited and slightly degraded). **It means that IE10+, Opera Mini and Android browsers have no support at all.** Moreover, IE filters shouldn't be used.
+**Be careful**, not all browsers support CSS or SVG filters on HTML content:
+
+* latest WebKit browsers support CSS shorthand
+* Firefox support SVG filters (and CSS shorthand since FF35)
+* IE9- support IE filters (limited and slightly degraded)
+
+**It means that IE10+, Opera Mini and Android browsers have no support at all on HTML, only in SVG.**
+
+Moreover, IE filters shouldn't be used.
+
+See [caniuse](http://caniuse.com/#feat=svg-filters) for more info.
 
 ##Licence
 
