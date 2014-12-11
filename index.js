@@ -529,7 +529,7 @@ Filter.prototype.convert = function (value) {
 		properties = this.filters.blur(amount, unit);
 	}
 	// Drop Shadow
-	fmatch = value.match(/(drop\-shadow)\((\s*[0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([a-z0-9#%,.\s]+)\s*\)/i);
+	fmatch = value.match(/(drop\-shadow)\((\s*[0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([a-z0-9\#\%\,\.\s\(\)]*)(?=\s*\))/i);
 	if (fmatch !== null) {
 		var offsetX    = parseFloat(fmatch[2], 10),
 			unitX      = fmatch[3],
@@ -564,8 +564,12 @@ Filter.prototype.postcss = function (css) {
 					filtersIE:  []
 				};
 
-				for (var key in values) {
-					var value = values[key] + ')';
+				for (var i = 0; i < values.length; i++) {
+					var value = values[i];
+					// when splitting values, re-add closing parenthesis
+					if (i != values.length - 1) {
+						value += ')';
+					}
 					var currentProperties = _this.convert(value);
 					for (var j in currentProperties){
 						if (typeof properties[j] !== 'undefined') {
