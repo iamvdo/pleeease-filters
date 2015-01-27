@@ -21,7 +21,7 @@
     "test": "jasmine-node spec"
   },
   "dependencies": {
-    "postcss": "^3.0.0",
+    "postcss": "^4.0.2",
     "onecolor": "~2.4.0"
   },
   "devDependencies": {
