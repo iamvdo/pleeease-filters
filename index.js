@@ -368,7 +368,7 @@ function Filter (opts) {
 		},
 
 		// Drop Shadow
-		dropShadow: function (offsetX, unitX, offsetY, unitY, radius, unitRadius, color) {
+		dropShadow: function (offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color) {
 			offsetX = Math.round(offsetX) || 0;
 			offsetY = Math.round(offsetY) || 0;
 			radius = Math.round(radius) || 0;
@@ -529,7 +529,7 @@ Filter.prototype.convert = function (value) {
 		properties = this.filters.blur(amount, unit);
 	}
 	// Drop Shadow
-	fmatch = value.match(/(drop\-shadow)\((\s*[0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([a-z0-9\#\%\,\.\s\(\)]*)(?=\s*\))/i);
+	fmatch = value.match(/(drop\-shadow)\((\s*[0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )(\s*([0-9\.]+)(px|em|rem| ))?\s*([a-z0-9\#\%\,\.\s\(\)]*)(?=\s*\))/i);
 	if (fmatch !== null) {
 		var offsetX    = parseFloat(fmatch[2], 10),
 			unitX      = fmatch[3],
@@ -537,8 +537,10 @@ Filter.prototype.convert = function (value) {
 			unitY      = fmatch[5],
 			radius     = parseFloat(fmatch[6], 10),
 			unitRadius = fmatch[7],
-			color      = fmatch[8];
-			properties = this.filters.dropShadow(offsetX, unitX, offsetY, unitY, radius, unitRadius, color);
+			spread     = parseFloat(fmatch[9], 10),
+			unitSpread = fmatch[10],
+			color      = fmatch[11];
+			properties = this.filters.dropShadow(offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color);
 	}
 
 	return properties;
