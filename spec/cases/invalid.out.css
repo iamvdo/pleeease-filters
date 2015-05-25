@@ -10,3 +10,6 @@
 .invalid {
 	filter: invert(40 %);
 }
+.invalid {
+  filter: drop-shadow(4px 4px 4px 2 orangered);
+}

@@ -376,7 +376,7 @@ function Filter (opts) {
 
 			var properties = {};
 
-			if ((unitX === ' ' && offsetX !== 0) || (unitY === ' ' && offsetY !== 0) || (unitRadius === ' ' && radius !== 0)) {
+			if ((unitX === ' ' && offsetX !== 0) || (unitY === ' ' && offsetY !== 0) || (unitRadius === ' ' && radius !== 0) || spread) {
 				return properties;
 			}
 
