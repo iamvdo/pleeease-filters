@@ -1,3 +1,7 @@
+# 1.0.1 - 2015-05-25
+
+- Avoid drop-shadow spread to throw an error, and keep as-is
+
 # 1.0.0 - 2015-01-27
 
 - Added: upgrade to postcss v4.x
