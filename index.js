@@ -551,9 +551,9 @@ Filter.prototype.postcss = function (css) {
 
 	var _this = this;
 
-	css.eachRule(function (rule) {
+	css.walkRules(function (rule) {
 
-		rule.eachDecl(function (decl, idx) {
+		rule.walkDecls(function (decl, idx) {
 
 			// find filter declaration
 			if (decl.prop === 'filter') {
@@ -593,7 +593,7 @@ Filter.prototype.postcss = function (css) {
 					// insert IE filters, only if it's not already present
 					var newDecl = { prop: 'filter', value: filtersIE};
 					var add = true;
-					rule.eachDecl(function (d) {
+					rule.walkDecls(function (d) {
 						if (newDecl.value === d.value) {
 							add = false;
 							return false;
@@ -619,7 +619,7 @@ Filter.prototype.postcss = function (css) {
 						// insert SVG filters, only if it's not already present
 						var newDecl = { prop: 'filter', value: filtersSVG};
 						var add = true;
-						rule.eachDecl(function (d) {
+						rule.walkDecls(function (d) {
 							if (newDecl.value === d.value) {
 								add = false;
 								return false;
