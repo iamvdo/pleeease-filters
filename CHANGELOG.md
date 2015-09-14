@@ -1,3 +1,7 @@
+# 2.0.0 - 2015-09-14
+
+- Update to PostCSS 5
+
 # 1.0.1 - 2015-05-25
 
 - Avoid drop-shadow spread to throw an error, and keep as-is
