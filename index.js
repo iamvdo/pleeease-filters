@@ -643,11 +643,6 @@ Filter.prototype.process = function (css) {
 	return postcss().use(this.postcss).process(css).css;
 };
 
-var filter = function (options) {
-	return new Filter(options);
-};
-filter.process = function (css, options) {
-	return new Filter(options).process(css);
-};
-
-module.exports = filter;
+module.exports = postcss.plugin('pleeease-filters', function(options) {
+	return new Filter(options).postcss;
+});
