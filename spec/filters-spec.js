@@ -22,7 +22,7 @@ var test = function (name, options) {
   // process
   var processed = filter.process(css, options);
 
-  expect(processed).toBe(expected);
+  expect(processed.css).toBe(expected);
 };
 
 describe('pleeease-filters', function () {
