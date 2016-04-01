@@ -1,3 +1,7 @@
+# 3.0.0 - 2016-04-01
+
+- Export as a PostCSS plugin. Now returns a [LazyResult instance](https://github.com/postcss/postcss/blob/master/docs/api.md#lazyresult-class) instead of processed css.
+
 # 2.0.0 - 2015-09-14
 
 - Update to PostCSS 5
