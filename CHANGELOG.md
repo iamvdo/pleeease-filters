@@ -1,3 +1,5 @@
+**3.0.1** - 2017-02-07 - Better splitting of filters functions and trim colors (fix #14)
+
 # 3.0.0 - 2016-04-01
 
 - Export as a PostCSS plugin. Now returns a [LazyResult instance](https://github.com/postcss/postcss/blob/master/docs/api.md#lazyresult-class) instead of processed css.
