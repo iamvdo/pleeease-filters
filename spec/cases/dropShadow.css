@@ -5,6 +5,9 @@
   filter: drop-shadow(4px 4px 4px rgba(255,0,0,.5));
 }
 .dropShadow {
+  filter: drop-shadow(4px 4px 4px rgba(255,0,0,.5) );
+}
+.dropShadow {
 	filter: drop-shadow(4px 4px 4px 2px orangered);
 }
 .dropShadow {

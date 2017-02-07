@@ -539,7 +539,7 @@ Filter.prototype.convert = function (value) {
 			unitRadius = fmatch[7],
 			spread     = parseFloat(fmatch[9], 10),
 			unitSpread = fmatch[10],
-			color      = fmatch[11];
+			color      = fmatch[11].trim();
 			properties = this.filters.dropShadow(offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color);
 	}
 
@@ -559,7 +559,7 @@ Filter.prototype.postcss = function (css) {
 			if (decl.prop === 'filter') {
 
 				// get values
-				var values = decl.value.split(/\)\s+/);
+				var values = decl.value.split(/\)\s+(?!\))/);
 				var properties = {
 					filtersCSS: [],
 					filtersSVG: [],
