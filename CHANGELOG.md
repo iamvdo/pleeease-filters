@@ -1,3 +1,8 @@
+# 4.0.0 - 2017-05-09
+
+- Update to PostCSS 6
+- Remove Node 0.12 support
+
 **3.0.1** - 2017-02-07 - Better splitting of filters functions and trim colors (fix #14)
 
 # 3.0.0 - 2016-04-01

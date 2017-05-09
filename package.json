@@ -1,6 +1,6 @@
 {
   "name": "pleeease-filters",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Convert CSS shorthand filters to SVG ones",
   "author": {
     "name": "Vincent De Oliveira"
