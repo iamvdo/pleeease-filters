@@ -7,7 +7,7 @@ Used by [Pleeease](https://github.com/iamvdo/pleeease), a CSS post-processor.
 
 Try it by yourself in the [Pleeease playground](http://pleeease.io/playground.html?div%20%7B%0A%20%20filter:%20blur(4px)%0A%7D)
 
-##Example
+## Example
 
 You write `foo.css`:
 
@@ -26,7 +26,7 @@ You get `bar.css`:
 }
 ```
 
-##Filters
+## Filters
 
 It converts all 10 CSS shorthand filters:
 
@@ -43,7 +43,7 @@ It converts all 10 CSS shorthand filters:
 
 Learn [more about CSS filters](https://developer.mozilla.org/en-US/docs/Web/CSS/filter)
 
-##Prefixes
+## Prefixes
 
 This tool doesn't add prefixes. If you want them, you should use [Autoprefixer](https://github.com/ai/autoprefixer). This is what [Pleeease](https://github.com/iamvdo/pleeease) does:
 
@@ -55,7 +55,7 @@ This tool doesn't add prefixes. If you want them, you should use [Autoprefixer](
 }
 ```
 
-##Usage
+## Usage
 
 	$ npm install pleeease-filters
 
@@ -77,7 +77,7 @@ fs.writeFile('app.min.css', fixed, function (err) {
   console.log('File saved!');
 });
 ```
-##Options
+## Options
 
 You can also add IE filters with an option:
 
@@ -98,7 +98,7 @@ Using the first example, you'll get:
 }
 ```
 
-##Note
+## Note
 
 **Be careful**, not all browsers support CSS or SVG filters on HTML content:
 
@@ -112,7 +112,7 @@ Moreover, IE filters shouldn't be used.
 
 See [caniuse](http://caniuse.com/#feat=svg-filters) for more info.
 
-##Licence
+## Licence
 
 MIT © 2014 [Vincent De Oliveira &middot; iamvdo](https://github.com/iamvdo)
 
