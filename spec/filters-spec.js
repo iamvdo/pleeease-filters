@@ -3,8 +3,9 @@
 // 1. `npm test`
 
 'use strict';
-var fs     = require('fs');
-var filter = require('../index');
+var fs      = require('fs');
+var postcss = require('postcss');
+var filter  = require('../index');
 
 var __dirname = 'spec/cases/';
 
@@ -20,7 +21,7 @@ var test = function (name, options) {
   }
 
   // process
-  var processed = filter.process(css, options);
+  var processed = postcss(filter(options)).process(css)
 
   expect(processed.css).toBe(expected);
 };
