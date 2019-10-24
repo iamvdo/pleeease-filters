@@ -40,6 +40,374 @@ var createSVGElement = function (tagname, attributes, subElements) {
 
 };
 
+const filters = {
+	// None
+	none: function () {
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['none'];
+
+		// SVG
+		properties.filtersSVG = ['none'];
+
+		// IE
+		// properties.filtersIE = ['none'];
+
+		return properties;
+	},
+
+	// Grayscale
+	grayscale: function (amount, unit) {
+		amount = amount || 0;
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['grayscale(' + amount + ')'];
+
+		// SVG
+		var svg = createSVGElement('feColorMatrix', {
+			type: 'matrix',
+			'color-interpolation-filters': 'sRGB',
+			values: (0.2126 + 0.7874 * (1 - amount)) + ' ' +
+				(0.7152 - 0.7152 * (1 - amount)) + ' ' +
+				(0.0722 - 0.0722 * (1 - amount)) + ' 0 0 ' +
+				(0.2126 - 0.2126 * (1 - amount)) + ' ' +
+				(0.7152 + 0.2848 * (1 - amount)) + ' ' +
+				(0.0722 - 0.0722 * (1 - amount)) + ' 0 0 ' +
+				(0.2126 - 0.2126 * (1 - amount)) + ' ' +
+				(0.7152 - 0.7152 * (1 - amount)) + ' ' +
+				(0.0722 + 0.9278 * (1 - amount)) + ' 0 0 0 0 0 1 0'
+		});
+		properties.filtersSVG = [svg];
+
+		// IE
+		properties.filtersIE = amount >= 0.5 ? ['gray'] : [];
+
+		return properties;
+	},
+
+	// Sepia
+	sepia: function (amount, unit) {
+		amount = amount || 0;
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['sepia(' + amount + ')'];
+
+		// SVG
+		var svg = createSVGElement('feColorMatrix', {
+			type: 'matrix',
+			'color-interpolation-filters': 'sRGB',
+			values: (0.393 + 0.607 * (1 - amount)) + ' ' +
+				(0.769 - 0.769 * (1 - amount)) + ' ' +
+				(0.189 - 0.189 * (1 - amount)) + ' 0 0 ' +
+				(0.349 - 0.349 * (1 - amount)) + ' ' +
+				(0.686 + 0.314 * (1 - amount)) + ' ' +
+				(0.168 - 0.168 * (1 - amount)) + ' 0 0 ' +
+				(0.272 - 0.272 * (1 - amount)) + ' ' +
+				(0.534 - 0.534 * (1 - amount)) + ' ' +
+				(0.131 + 0.869 * (1 - amount)) + ' 0 0 0 0 0 1 0'
+		});
+		properties.filtersSVG = [svg];
+
+		// IE
+		properties.filtersIE = amount >= 0.5 ? ['gray','progid:DXImageTransform.Microsoft.Light()'] : [];
+
+		return properties;
+	},
+
+	// Saturate
+	saturate: function (amount, unit) {
+		amount = amount || 1;
+
+		var properties = {};
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		// CSS
+		properties.filtersCSS = ['saturate(' + amount + ')'];
+
+		// SVG
+		var svg = createSVGElement('feColorMatrix', {
+			type: 'matrix',
+			'color-interpolation-filters': 'sRGB',
+			values: (0.213 + 0.787 * (amount)) + ' ' +
+				(0.715 - 0.715 * (amount)) + ' ' +
+				(0.072 - 0.072 * (amount)) + ' 0 0 ' +
+				(0.213 - 0.213 * (amount)) + ' ' +
+				(0.715 + 0.295 * (amount)) + ' '+
+				(0.072 - 0.072 * (amount)) + ' 0 0 '+
+				(0.213 - 0.213 * (amount)) + ' ' +
+				(0.715 - 0.715 * (amount)) + ' ' +
+				(0.072 + 0.928 * (amount)) + ' 0 0 0 0 0 1 0'
+		});
+		properties.filtersSVG = [svg];
+
+		// IE
+		// no filter
+
+		return properties;
+	},
+
+	// Hue-rotate
+	hueRotate: function (angle, unit) {
+		angle = angle || 0;
+
+		angle = helpers.angle(angle, unit);
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['hue-rotate(' + angle + 'deg)'];
+
+		// SVG
+		var svg = createSVGElement('feColorMatrix', {
+			type: 'hueRotate',
+			'color-interpolation-filters': 'sRGB',
+			values: angle
+		});
+		properties.filtersSVG = [svg];
+
+		// IE
+		// no filter
+
+		return properties;
+	},
+
+	// Invert
+	invert: function (amount, unit) {
+		amount = amount || 0;
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['invert(' + amount + ')'];
+
+		// SVG
+		var svgSub1 = createSVGElement('feFuncR', {
+			type: 'table',
+			tableValues: amount + ' ' + (1 - amount)
+		});
+		var svgSub2 = createSVGElement('feFuncG', {
+			type: 'table',
+			tableValues: amount + ' ' + (1 - amount)
+		});
+		var svgSub3 = createSVGElement('feFuncB', {
+			type: 'table',
+			tableValues: amount + ' ' + (1 - amount)
+		});
+		var svg = createSVGElement('feComponentTransfer', {
+			'color-interpolation-filters': 'sRGB'
+		}, [svgSub1, svgSub2, svgSub3]);
+		properties.filtersSVG = [svg];
+
+		// IE
+		properties.filtersIE = amount >= 0.5 ? ['invert'] : [];
+
+		return properties;
+	},
+
+	// Opacity
+	opacity: function (amount, unit) {
+		amount = amount || 1;
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['opacity(' + amount + ')'];
+
+		// SVG
+		var svgSub1 = createSVGElement('feFuncA', {
+			type: 'table',
+			tableValues: '0 ' + amount
+		});
+		var svg = createSVGElement('feComponentTransfer', {
+			'color-interpolation-filters': 'sRGB'
+		}, [svgSub1]);
+		properties.filtersSVG = [svg];
+
+		// IE
+		// no filter
+
+		return properties;
+	},
+
+	// Brightness
+	brightness: function (amount, unit) {
+		amount = amount || 1;
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['brightness(' + amount + ')'];
+
+		// SVG
+		var svgSub1 = createSVGElement('feFuncR', {
+			type: 'linear',
+			slope: amount
+		});
+		var svgSub2 = createSVGElement('feFuncG', {
+			type: 'linear',
+			slope: amount
+		});
+		var svgSub3 = createSVGElement('feFuncB', {
+			type: 'linear',
+			slope: amount
+		});
+		var svg = createSVGElement('feComponentTransfer', {
+			'color-interpolation-filters': 'sRGB'
+		}, [svgSub1, svgSub2, svgSub3]);
+		properties.filtersSVG = [svg];
+
+		// IE
+		properties.filtersIE = ['progid:DXImageTransform.Microsoft.Light()'];
+
+		return properties;
+	},
+
+	// Contrast
+	contrast: function (amount, unit) {
+		amount = amount || 1;
+
+		if (typeof unit !== 'undefined') {
+			amount /= 100;
+		}
+
+		var properties = {};
+
+		// CSS
+		properties.filtersCSS = ['contrast(' + amount + ')'];
+
+		// SVG
+		var svgSub1 = createSVGElement('feFuncR', {
+			type: 'linear',
+			slope: amount,
+			intercept: -(0.5 * amount) + 0.5
+		});
+		var svgSub2 = createSVGElement('feFuncG', {
+			type: 'linear',
+			slope: amount,
+			intercept: -(0.5 * amount) + 0.5
+		});
+		var svgSub3 = createSVGElement('feFuncB', {
+			type: 'linear',
+			slope: amount,
+			intercept: -(0.5 * amount) + 0.5
+		});
+		var svg = createSVGElement('feComponentTransfer', {
+			'color-interpolation-filters': 'sRGB'
+		}, [svgSub1, svgSub2, svgSub3]);
+		properties.filtersSVG = [svg];
+
+		// IE
+		// no filter
+
+		return properties;
+	},
+
+	// Blur
+	blur: function (amount, unit) {
+		amount = amount || 0;
+
+		var properties = {};
+
+		if (unit === '' && amount !== 0) {
+			return properties;
+		}
+
+		amount = helpers.length(amount, unit);
+
+		// CSS
+		properties.filtersCSS = ['blur(' + amount + 'px)'];
+
+		// SVG
+		var svg = createSVGElement('feGaussianBlur', {
+			stdDeviation: amount
+		});
+		properties.filtersSVG = [svg];
+
+		// IE
+		properties.filtersIE = ['progid:DXImageTransform.Microsoft.Blur(pixelradius=' + amount + ')'];
+
+		return properties;
+	},
+
+	// Drop Shadow
+	dropShadow: function (offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color) {
+		offsetX = Math.round(offsetX) || 0;
+		offsetY = Math.round(offsetY) || 0;
+		radius = Math.round(radius) || 0;
+		color = color || '#000000';
+
+		var properties = {};
+
+		if ((unitX === ' ' && offsetX !== 0) || (unitY === ' ' && offsetY !== 0) || (unitRadius === ' ' && radius !== 0) || spread) {
+			return properties;
+		}
+
+		offsetX = helpers.length(offsetX, unitX);
+		offsetY = helpers.length(offsetY, unitY);
+		radius  = helpers.length(radius, unitRadius);
+
+		// CSS
+		properties.filtersCSS = ['drop-shadow(' + offsetX + 'px ' + offsetY + 'px ' + radius + 'px ' + color + ')'];
+
+		// SVG
+		var svg1 = createSVGElement('feGaussianBlur', {
+			'in': 'SourceAlpha',
+			stdDeviation: radius
+		});
+		var svg2 = createSVGElement('feOffset', {
+			dx: offsetX + 1,
+			dy: offsetY + 1,
+			result: 'offsetblur'
+		});
+		var svg3 = createSVGElement('feFlood', {
+			'flood-color': oneColor(color).cssa()
+		});
+		var svg4 = createSVGElement('feComposite', {
+			in2: 'offsetblur',
+			operator: 'in'
+		});
+		var svg5Sub1 = createSVGElement('feMergeNode', {});
+		var svg5Sub2 = createSVGElement('feMergeNode', {
+			'in': 'SourceGraphic'
+		});
+		var svg5 = createSVGElement('feMerge', {}, [svg5Sub1, svg5Sub2]);
+		properties.filtersSVG = [svg1,svg2,svg3,svg4,svg5];
+
+		// IE
+		properties.filtersIE = ['progid:DXImageTransform.Microsoft.Glow(color=' + color + ',strength=0)','progid:DXImageTransform.Microsoft.Shadow(color=' + color + ',strength=0)'];
+
+		return properties;
+	}
+};
+
 // Filter object
 function Filter (opts) {
 
@@ -48,375 +416,6 @@ function Filter (opts) {
 		oldIE: opts.oldIE || false
 	};
 	this.postcss = this.postcss.bind(this);
-
-	this.filters = {
-
-		// None
-		none: function () {
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['none'];
-
-			// SVG
-			properties.filtersSVG = ['none'];
-
-			// IE
-			// properties.filtersIE = ['none'];
-
-			return properties;
-		},
-
-		// Grayscale
-		grayscale: function (amount, unit) {
-			amount = amount || 0;
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['grayscale(' + amount + ')'];
-
-			// SVG
-			var svg = createSVGElement('feColorMatrix', {
-				type: 'matrix',
-				'color-interpolation-filters': 'sRGB',
-				values: (0.2126 + 0.7874 * (1 - amount)) + ' ' +
-						(0.7152 - 0.7152 * (1 - amount)) + ' ' +
-						(0.0722 - 0.0722 * (1 - amount)) + ' 0 0 ' +
-						(0.2126 - 0.2126 * (1 - amount)) + ' ' +
-						(0.7152 + 0.2848 * (1 - amount)) + ' ' +
-						(0.0722 - 0.0722 * (1 - amount)) + ' 0 0 ' +
-						(0.2126 - 0.2126 * (1 - amount)) + ' ' +
-						(0.7152 - 0.7152 * (1 - amount)) + ' ' +
-						(0.0722 + 0.9278 * (1 - amount)) + ' 0 0 0 0 0 1 0'
-			});
-			properties.filtersSVG = [svg];
-
-			// IE
-			properties.filtersIE = amount >= 0.5 ? ['gray'] : [];
-
-			return properties;
-		},
-
-		// Sepia
-		sepia: function (amount, unit) {
-			amount = amount || 0;
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['sepia(' + amount + ')'];
-
-			// SVG
-			var svg = createSVGElement('feColorMatrix', {
-				type: 'matrix',
-				'color-interpolation-filters': 'sRGB',
-				values: (0.393 + 0.607 * (1 - amount)) + ' ' +
-						(0.769 - 0.769 * (1 - amount)) + ' ' +
-						(0.189 - 0.189 * (1 - amount)) + ' 0 0 ' +
-						(0.349 - 0.349 * (1 - amount)) + ' ' +
-						(0.686 + 0.314 * (1 - amount)) + ' ' +
-						(0.168 - 0.168 * (1 - amount)) + ' 0 0 ' +
-						(0.272 - 0.272 * (1 - amount)) + ' ' +
-						(0.534 - 0.534 * (1 - amount)) + ' ' +
-						(0.131 + 0.869 * (1 - amount)) + ' 0 0 0 0 0 1 0'
-			});
-			properties.filtersSVG = [svg];
-
-			// IE
-			properties.filtersIE = amount >= 0.5 ? ['gray','progid:DXImageTransform.Microsoft.Light()'] : [];
-
-			return properties;
-		},
-
-		// Saturate
-		saturate: function (amount, unit) {
-			amount = amount || 1;
-
-			var properties = {};
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			// CSS
-			properties.filtersCSS = ['saturate(' + amount + ')'];
-
-			// SVG
-			var svg = createSVGElement('feColorMatrix', {
-				type: 'matrix',
-				'color-interpolation-filters': 'sRGB',
-				values: (0.213 + 0.787 * (amount)) + ' ' +
-						(0.715 - 0.715 * (amount)) + ' ' +
-						(0.072 - 0.072 * (amount)) + ' 0 0 ' +
-						(0.213 - 0.213 * (amount)) + ' ' +
-						(0.715 + 0.295 * (amount)) + ' '+
-						(0.072 - 0.072 * (amount)) + ' 0 0 '+
-						(0.213 - 0.213 * (amount)) + ' ' +
-						(0.715 - 0.715 * (amount)) + ' ' +
-						(0.072 + 0.928 * (amount)) + ' 0 0 0 0 0 1 0'
-			});
-			properties.filtersSVG = [svg];
-
-			// IE
-			// no filter
-
-			return properties;
-		},
-
-		// Hue-rotate
-		hueRotate: function (angle, unit) {
-			angle = angle || 0;
-
-			angle = helpers.angle(angle, unit);
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['hue-rotate(' + angle + 'deg)'];
-
-			// SVG
-			var svg = createSVGElement('feColorMatrix', {
-				type: 'hueRotate',
-				'color-interpolation-filters': 'sRGB',
-				values: angle
-			});
-			properties.filtersSVG = [svg];
-
-			// IE
-			// no filter
-
-			return properties;
-		},
-
-		// Invert
-		invert: function (amount, unit) {
-			amount = amount || 0;
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['invert(' + amount + ')'];
-
-			// SVG
-			var svgSub1 = createSVGElement('feFuncR', {
-				type: 'table',
-				tableValues: amount + ' ' + (1 - amount)
-			});
-			var svgSub2 = createSVGElement('feFuncG', {
-				type: 'table',
-				tableValues: amount + ' ' + (1 - amount)
-			});
-			var svgSub3 = createSVGElement('feFuncB', {
-				type: 'table',
-				tableValues: amount + ' ' + (1 - amount)
-			});
-			var svg = createSVGElement('feComponentTransfer', {
-				'color-interpolation-filters': 'sRGB'
-			}, [svgSub1, svgSub2, svgSub3]);
-			properties.filtersSVG = [svg];
-
-			// IE
-			properties.filtersIE = amount >= 0.5 ? ['invert'] : [];
-
-			return properties;
-		},
-
-		// Opacity
-		opacity: function (amount, unit) {
-			amount = amount || 1;
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['opacity(' + amount + ')'];
-
-			// SVG
-			var svgSub1 = createSVGElement('feFuncA', {
-				type: 'table',
-				tableValues: '0 ' + amount
-			});
-			var svg = createSVGElement('feComponentTransfer', {
-				'color-interpolation-filters': 'sRGB'
-			}, [svgSub1]);
-			properties.filtersSVG = [svg];
-
-			// IE
-			// no filter
-
-			return properties;
-		},
-
-		// Brightness
-		brightness: function (amount, unit) {
-			amount = amount || 1;
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['brightness(' + amount + ')'];
-
-			// SVG
-			var svgSub1 = createSVGElement('feFuncR', {
-				type: 'linear',
-				slope: amount
-			});
-			var svgSub2 = createSVGElement('feFuncG', {
-				type: 'linear',
-				slope: amount
-			});
-			var svgSub3 = createSVGElement('feFuncB', {
-				type: 'linear',
-				slope: amount
-			});
-			var svg = createSVGElement('feComponentTransfer', {
-				'color-interpolation-filters': 'sRGB'
-			}, [svgSub1, svgSub2, svgSub3]);
-			properties.filtersSVG = [svg];
-
-			// IE
-			properties.filtersIE = ['progid:DXImageTransform.Microsoft.Light()'];
-
-			return properties;
-		},
-
-		// Contrast
-		contrast: function (amount, unit) {
-			amount = amount || 1;
-
-			if (typeof unit !== 'undefined') {
-				amount /= 100;
-			}
-
-			var properties = {};
-
-			// CSS
-			properties.filtersCSS = ['contrast(' + amount + ')'];
-
-			// SVG
-			var svgSub1 = createSVGElement('feFuncR', {
-				type: 'linear',
-				slope: amount,
-				intercept: -(0.5 * amount) + 0.5
-			});
-			var svgSub2 = createSVGElement('feFuncG', {
-				type: 'linear',
-				slope: amount,
-				intercept: -(0.5 * amount) + 0.5
-			});
-			var svgSub3 = createSVGElement('feFuncB', {
-				type: 'linear',
-				slope: amount,
-				intercept: -(0.5 * amount) + 0.5
-			});
-			var svg = createSVGElement('feComponentTransfer', {
-				'color-interpolation-filters': 'sRGB'
-			}, [svgSub1, svgSub2, svgSub3]);
-			properties.filtersSVG = [svg];
-
-			// IE
-			// no filter
-
-			return properties;
-		},
-
-		// Blur
-		blur: function (amount, unit) {
-			amount = amount || 0;
-
-			var properties = {};
-
-			if (unit === '' && amount !== 0) {
-				return properties;
-			}
-
-			amount = helpers.length(amount, unit);
-
-			// CSS
-			properties.filtersCSS = ['blur(' + amount + 'px)'];
-
-			// SVG
-			var svg = createSVGElement('feGaussianBlur', {
-				stdDeviation: amount
-			});
-			properties.filtersSVG = [svg];
-
-			// IE
-			properties.filtersIE = ['progid:DXImageTransform.Microsoft.Blur(pixelradius=' + amount + ')'];
-
-			return properties;
-		},
-
-		// Drop Shadow
-		dropShadow: function (offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color) {
-			offsetX = Math.round(offsetX) || 0;
-			offsetY = Math.round(offsetY) || 0;
-			radius = Math.round(radius) || 0;
-			color = color || '#000000';
-
-			var properties = {};
-
-			if ((unitX === ' ' && offsetX !== 0) || (unitY === ' ' && offsetY !== 0) || (unitRadius === ' ' && radius !== 0) || spread) {
-				return properties;
-			}
-
-			offsetX = helpers.length(offsetX, unitX);
-			offsetY = helpers.length(offsetY, unitY);
-			radius  = helpers.length(radius, unitRadius);
-
-			// CSS
-			properties.filtersCSS = ['drop-shadow(' + offsetX + 'px ' + offsetY + 'px ' + radius + 'px ' + color + ')'];
-
-			// SVG
-			var svg1 = createSVGElement('feGaussianBlur', {
-				'in': 'SourceAlpha',
-				stdDeviation: radius
-			});
-			var svg2 = createSVGElement('feOffset', {
-				dx: offsetX + 1,
-				dy: offsetY + 1,
-				result: 'offsetblur'
-			});
-			var svg3 = createSVGElement('feFlood', {
-				'flood-color': oneColor(color).cssa()
-			});
-			var svg4 = createSVGElement('feComposite', {
-				in2: 'offsetblur',
-				operator: 'in'
-			});
-			var svg5Sub1 = createSVGElement('feMergeNode', {});
-			var svg5Sub2 = createSVGElement('feMergeNode', {
-				'in': 'SourceGraphic'
-			});
-			var svg5 = createSVGElement('feMerge', {}, [svg5Sub1, svg5Sub2]);
-			properties.filtersSVG = [svg1,svg2,svg3,svg4,svg5];
-
-			// IE
-			properties.filtersIE = ['progid:DXImageTransform.Microsoft.Glow(color=' + color + ',strength=0)','progid:DXImageTransform.Microsoft.Shadow(color=' + color + ',strength=0)'];
-
-			return properties;
-		}
-	};
 
 	var helpers = {
 
@@ -463,70 +462,70 @@ Filter.prototype.convert = function (value) {
 	// None
 	fmatch = value.match(/none/i);
 	if(fmatch !== null){
-		properties = this.filters.none();
+		properties = filters.none();
 	}
 	// Grayscale
 	fmatch = value.match(/(grayscale)\(\s*([0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.grayscale(amount, unit);
+		properties = filters.grayscale(amount, unit);
 	}
 	// Sepia
 	fmatch = value.match(/(sepia)\(\s*([0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.sepia(amount, unit);
+		properties = filters.sepia(amount, unit);
 	}
 	// Saturate
 	fmatch = value.match(/(saturate)\(\s*([0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.saturate(amount, unit);
+		properties = filters.saturate(amount, unit);
 	}
 	// Hue-rotate
 	fmatch = value.match(/(hue\-rotate)\((\s*[0-9\.]+)(deg|grad|rad|turn)\s*\)/i);
 	if (fmatch !== null) {
 		var angle = parseFloat(fmatch[2], 10);
 			unit = fmatch[3];
-			properties = this.filters.hueRotate(angle, unit);
+			properties = filters.hueRotate(angle, unit);
 	}
 	// Invert
 	fmatch = value.match(/(invert)\((\s*[0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.invert(amount, unit);
+		properties = filters.invert(amount, unit);
 	}
 	// Opacity
 	fmatch = value.match(/(opacity)\((\s*[0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.opacity(amount, unit);
+		properties = filters.opacity(amount, unit);
 	}
 	// Brightness
 	fmatch = value.match(/(brightness)\((\s*[0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.brightness(amount, unit);
+		properties = filters.brightness(amount, unit);
 	}
 	// Contrast
 	fmatch = value.match(/(contrast)\((\s*[0-9\.]+)(%)*\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.contrast(amount, unit);
+		properties = filters.contrast(amount, unit);
 	}
 	// Blur
 	fmatch = value.match(/(blur)\((\s*[0-9\.]+)(px|em|rem|)\s*\)/i);
 	if (fmatch !== null) {
 		amount = parseFloat(fmatch[2], 10);
 		unit   = fmatch[3];
-		properties = this.filters.blur(amount, unit);
+		properties = filters.blur(amount, unit);
 	}
 	// Drop Shadow
 	fmatch = value.match(/(drop\-shadow)\((\s*[0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )\s*([0-9\.]+)(px|em|rem| )(\s*([0-9\.]+)(px|em|rem| ))?\s*([a-z0-9\#\%\,\.\s\(\)]*)(?=\s*\))/i);
@@ -540,7 +539,7 @@ Filter.prototype.convert = function (value) {
 			spread     = parseFloat(fmatch[9], 10),
 			unitSpread = fmatch[10],
 			color      = fmatch[11].trim();
-			properties = this.filters.dropShadow(offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color);
+			properties = filters.dropShadow(offsetX, unitX, offsetY, unitY, radius, unitRadius, spread, unitSpread, color);
 	}
 
 	return properties;
@@ -646,3 +645,5 @@ Filter.prototype.process = function (css) {
 module.exports = postcss.plugin('pleeease-filters', function(options) {
 	return new Filter(options).postcss;
 });
+
+module.exports.filters = filters;
