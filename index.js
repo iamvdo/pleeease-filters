@@ -40,7 +40,40 @@ var createSVGElement = function (tagname, attributes, subElements) {
 
 };
 
-const filters = {
+var helpers = {
+
+	length: function (amount, unit) {
+		switch (unit) {
+			case 'px':
+				break;
+			case 'em':
+			case 'rem':
+				amount *= 16;
+				break;
+		}
+		return amount;
+	},
+
+	angle: function (amount, unit) {
+		switch (unit) {
+			case 'deg':
+				break;
+			case 'grad':
+				amount = 180 * amount / 200;
+				break;
+			case 'rad':
+				amount = 180 * amount / Math.PI;
+				break;
+			case 'turn':
+				amount = 360 * amount;
+				break;
+		}
+		return amount;
+	}
+
+};
+
+var filters = {
 	// None
 	none: function () {
 		var properties = {};
@@ -416,40 +449,6 @@ function Filter (opts) {
 		oldIE: opts.oldIE || false
 	};
 	this.postcss = this.postcss.bind(this);
-
-	var helpers = {
-
-		length: function (amount, unit) {
-			switch (unit) {
-				case 'px':
-					break;
-				case 'em':
-				case 'rem':
-					amount *= 16;
-					break;
-			}
-			return amount;
-		},
-
-		angle: function (amount, unit) {
-			switch (unit) {
-				case 'deg':
-					break;
-				case 'grad':
-					amount = 180 * amount / 200;
-					break;
-				case 'rad':
-					amount = 180 * amount / Math.PI;
-					break;
-				case 'turn':
-					amount = 360 * amount;
-					break;
-			}
-			return amount;
-		}
-
-	};
-
 }
 
 Filter.prototype.convert = function (value) {
