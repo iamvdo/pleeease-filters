@@ -1,4 +1,3 @@
-var postcss  = require('postcss');
 var oneColor = require('onecolor');
 
 // SVG
@@ -9,9 +8,7 @@ var createSVG = function (filterElements) {
 
 	var svgFilter  = '<filter id="filter">';
 
-	for(var i = 0; i < filterElements.length; i++) {
-		svgFilter += filterElements[i];
-	}
+		svgFilter += filterElements.join("");
 
 		svgFilter += '</filter>';
 
@@ -29,9 +26,7 @@ var createSVGElement = function (tagname, attributes, subElements) {
 	}
 	if (subElements !== undefined) {
 		elem += '>';
-		for (var i = 0; i < subElements.length; i++) {
-			elem += subElements[i];
-		}
+		elem += subElements.join('');
 		elem += '</' + tagname + '>';
 	} else {
 		elem += ' />';
@@ -547,17 +542,14 @@ Filter.prototype.convert = function (value) {
 
 };
 
-Filter.prototype.postcss = function (css) {
+Filter.prototype.postcss = function() {
 
-	var _this = this;
+	const _this = this;
 
-	css.walkRules(function (rule) {
-
-		rule.walkDecls(function (decl, idx) {
-
-			// find filter declaration
-			if (decl.prop === 'filter') {
-
+	return {
+		postcssPlugin: 'pleeease-filters',
+		Declaration: {
+			filter(decl) {
 				// get values
 				var values = decl.value.split(/\)\s+(?!\))/);
 				var properties = {
@@ -580,69 +572,53 @@ Filter.prototype.postcss = function (css) {
 					}
 				}
 
-				if (properties.filtersCSS.length > 0) {
-					var filtersCSS = properties.filtersCSS.join(' ');
-
-					// set new value?
-					// decl.value = filtersCSS;
-				}
-
 				if (_this.options.oldIE && properties.filtersIE.length > 0) {
 					var filtersIE = properties.filtersIE.join(' ');
 
 					// insert IE filters, only if it's not already present
 					var newDecl = { prop: 'filter', value: filtersIE};
 					var add = true;
-					rule.walkDecls(function (d) {
+					decl.parent.walkDecls(function (d) {
 						if (newDecl.value === d.value) {
 							add = false;
 							return false;
 						}
 					});
 					if (add) {
-						rule.insertAfter(decl, newDecl);
+						decl.parent.insertAfter(decl, newDecl);
 					}
 				}
 
-				if (properties.filtersSVG.length > 0) {
-					var none = false;
-					for (var i = 0; i < properties.filtersSVG.length; i++) {
-						if (properties.filtersSVG[i] === 'none') {
-							none = true;
-							break;
-						}
-					}
-					if (!none) {
-						var svgString = createSVG(properties.filtersSVG);
-						var filtersSVG = 'url(\'data:image/svg+xml;charset=utf-8,' + svgString + '#filter\')';
+				if (properties.filtersSVG.length > 0 && !properties.filtersSVG.includes('none')) {
+					const svgString = createSVG(properties.filtersSVG);
+					const filtersSVG = 'url(\'data:image/svg+xml;charset=utf-8,' + svgString + '#filter\')';
 
-						// insert SVG filters, only if it's not already present
-						var newDecl = { prop: 'filter', value: filtersSVG};
-						var add = true;
-						rule.walkDecls(function (d) {
-							if (newDecl.value === d.value) {
-								add = false;
-								return false;
-							}
-						});
-						if (add) {
-							rule.insertBefore(decl, newDecl);
+					// insert SVG filters, only if it's not already present
+					const newDecl = { prop: 'filter', value: filtersSVG};
+					let add = true;
+					decl.parent.walkDecls((d) => {
+						if (newDecl.value === d.value) {
+							add = false;
+							return false;
 						}
+					});
+					if (add) {
+						decl.parent.insertBefore(decl, newDecl);
 					}
 				}
-
 			}
-
-		});
-
-	});
-
+		}
+	}
 };
 
 Filter.prototype.process = function (css) {
-	return postcss().use(this.postcss).process(css).css;
+	return postcss().use([this.postcss()]).process(css).css;
 };
 
-module.exports = postcss.plugin('pleeease-filters', function(options) {
-	return new Filter(options).postcss;
-});
+module.exports = (options) => {
+	const instance = new Filter(options);
+
+	return instance.postcss();
+}
+
+module.exports.postcss = true;
