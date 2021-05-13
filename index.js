@@ -612,6 +612,7 @@ Filter.prototype.postcss = function() {
 };
 
 Filter.prototype.process = function (css) {
+	const postcss = require("postcss");
 	return postcss().use([this.postcss()]).process(css).css;
 };
 
