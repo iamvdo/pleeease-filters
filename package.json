@@ -18,12 +18,16 @@
     "url": "https://github.com/iamvdo/pleeease-filters.git"
   },
   "scripts": {
+    "pretest": "eslint --ignore-path .gitignore .",
     "test": "jasmine-node spec"
   },
   "dependencies": {
     "onecolor": "^3.0.4"
   },
   "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.0",
     "jasmine-node": "^3.0.0",
     "postcss": "^8.2.15"
   },
