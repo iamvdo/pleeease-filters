@@ -57,18 +57,23 @@ This tool doesn't add prefixes. If you want them, you should use [Autoprefixer](
 
 ## Usage
 
-	$ npm install pleeease-filters
+	$ npm install postcss pleeease-filters
 
 ```javascript
-var filters = require('pleeease-filters'),
-	fs      = require('fs');
+const fs      = require('fs');
+const filters = require('pleeease-filters');
+const postcss = require('postcss');
 
-var css = fs.readFileSync('app.css', 'utf8');
+const css = fs.readFileSync('app.css', 'utf8');
 
 // define options here
-var options = {};
+const options = {};
 
-var fixed = filters.process(css, options);
+const fixed = postcss()
+	.use([filters(options)])
+	.process(css)
+	.css;
+
 
 fs.writeFile('app.min.css', fixed, function (err) {
   if (err) {

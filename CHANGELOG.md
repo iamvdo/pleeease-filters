@@ -1,3 +1,10 @@
+# 5.0.0 - ?
+
+- remove the `process` method, encourage the use as a normal PostCSS plugin
+- Update to PostCSS 8
+- Remove support for Node versions below 10
+- Add ESLint
+
 # 4.0.0 - 2017-05-09
 
 - Update to PostCSS 6
